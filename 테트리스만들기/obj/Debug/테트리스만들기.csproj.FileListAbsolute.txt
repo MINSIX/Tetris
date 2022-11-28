@@ -9,3 +9,14 @@ D:\과제'\테트리스\테트리스만들기\obj\Debug\테트리스만들기.cs
 D:\과제'\테트리스\테트리스만들기\obj\Debug\테트리스만들기.csproj.CoreCompileInputs.cache
 D:\과제'\테트리스\테트리스만들기\obj\Debug\테트리스만들기.exe
 D:\과제'\테트리스\테트리스만들기\obj\Debug\테트리스만들기.pdb
+D:\과제'\Tetris\테트리스만들기\bin\Debug\테트리스만들기.exe.config
+D:\과제'\Tetris\테트리스만들기\bin\Debug\테트리스만들기.exe
+D:\과제'\Tetris\테트리스만들기\bin\Debug\테트리스만들기.pdb
+D:\과제'\Tetris\테트리스만들기\obj\Debug\테트리스만들기.csproj.AssemblyReference.cache
+D:\과제'\Tetris\테트리스만들기\obj\Debug\테트리스만들기.csproj.SuggestedBindingRedirects.cache
+D:\과제'\Tetris\테트리스만들기\obj\Debug\테트리스만들기.Form1.resources
+D:\과제'\Tetris\테트리스만들기\obj\Debug\테트리스만들기.Properties.Resources.resources
+D:\과제'\Tetris\테트리스만들기\obj\Debug\테트리스만들기.csproj.GenerateResource.cache
+D:\과제'\Tetris\테트리스만들기\obj\Debug\테트리스만들기.csproj.CoreCompileInputs.cache
+D:\과제'\Tetris\테트리스만들기\obj\Debug\테트리스만들기.exe
+D:\과제'\Tetris\테트리스만들기\obj\Debug\테트리스만들기.pdb

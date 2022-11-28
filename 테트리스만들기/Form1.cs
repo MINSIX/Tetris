@@ -133,5 +133,10 @@ namespace 테트리스만들기
             rg1.Union(rg2);
             return rg1;
         }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            MoveDown();
+        }
     }
 }
