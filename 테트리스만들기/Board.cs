@@ -76,11 +76,14 @@ namespace 테트리스만들기
                 for (int yy = 0; yy < GameRule.BY; yy++)
                 {
                    
-                        CopyBoard();
-                    if (board[xx, yy] != 0)
+                        
+                    if (board[xx, yy] == 1)
                     {
+                        CopyBoard();
                         board[xx, yy] = 0;
                         board[GameRule.BX - yy - 1, xx] = cboard[xx, yy];
+                        
+                        
 
                     }
                        
@@ -94,15 +97,23 @@ namespace 테트리스만들기
                 for (int yy = 0; yy < GameRule.BY; yy++)
                 {
 
-                    CopyBoard();
-                    if (board[xx, yy] != 0)
+
+                    if (board[xx, yy] == 1)
                     {
-                        board[xx, yy] = 0; 
-                        board[yy, xx] = cboard[xx, yy];
+                        CopyBoard();
+                        if (board[yy, xx] == cboard[xx, yy])
+                            ;
+                        else
+                        {
+                            board[yy, xx] = board[xx, yy];
+                            board[xx, yy] = 0;
+                        }
                     }
+
                 }
             }
         }
+<<<<<<< HEAD
         //internal void DAB()
         //{
         //    count = 0;
@@ -125,6 +136,31 @@ namespace 테트리스만들기
         //        }
         //    }
         //}
+=======
+        internal void DAB()
+        {
+            count = 0;
+            int x = -1;
+            for (int yy = GameRule.BY -1; yy >= 0; yy--)
+            {
+                for (int xx =0; xx <GameRule.BX; xx++)
+                {
+                    if (board[xx, yy] != 0) { x = xx;break; }
+                }
+                if(x!=-1)
+                count++;
+            }
+            for (int y=GameRule.BY-1; y > 0; y--)
+            {
+                for (int xx = 0; xx < GameRule.BX; xx++)
+                {
+                    //윗줄의 내용을 아랫줄에 줄복사하는코드
+                    if (board[xx, y] != 0 && y + count < GameRule.BX) { board[xx, y] = board[xx, y + count]; }
+                    else if (y + count >= GameRule.BX) { board[xx, y] = board[xx, GameRule.BY - 1]; }
+                }
+            }
+        }
+>>>>>>> refs/remotes/origin/main
         private void CheckLines(int y)
         {
             int yy = 0;
