@@ -116,6 +116,41 @@ namespace 테트리스만들기
                 case Keys.Left: MoveLeft(); return;
                 case Keys.Down: MoveDown(); return;
                 case Keys.Up: MoveTurn(); return;
+                case Keys.Space: MoveSSDown(); return;
+            }
+        }
+
+        private void MoveSSDown()
+        {
+            while (game.MoveDown())
+            {
+                Region rg = MakeRegion(0, -1);
+                Invalidate(rg);
+            }
+            EndingCheck();
+            
+        }
+
+        private void EndingCheck()
+        {
+            if (game.Next())
+            {
+                Invalidate();
+            }
+            else
+            {
+                timer_down.Enabled = false;
+                DialogResult re = MessageBox.Show("다시 시작", "의사", MessageBoxButtons.YesNo);
+                if (re == DialogResult.Yes)
+                {
+                    game.Restart();
+                    timer_down.Enabled=true;
+                    Invalidate();
+                }
+                else
+                {
+                    Close();
+                }
             }
         }
 
@@ -135,7 +170,14 @@ namespace 테트리스만들기
                 Region rg = MakeRegion(0, -1);
                 Invalidate(rg);
             }
+            else
+            {
+                EndingCheck();
+               
+            }
         }
+
+  
 
         private void MoveLeft()
         {

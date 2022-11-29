@@ -35,7 +35,7 @@
             // timer_down
             // 
             this.timer_down.Enabled = true;
-            this.timer_down.Interval = 1000;
+            this.timer_down.Interval = 1500;
             this.timer_down.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1

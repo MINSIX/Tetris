@@ -116,7 +116,7 @@ namespace 테트리스만들기
                         if ((now.Y + yy + 1) >= GameRule.BY)
                         {
                             gboard.Store(now.BlockNum, Turn, now.X, now.Y);
-                            now.Reset();
+                         
                             return false;
                         }
                     }
@@ -128,7 +128,7 @@ namespace 테트리스만들기
                 return true;
             }
             gboard.Store(now.BlockNum, Turn, now.X, now.Y);
-            now.Reset();
+           
             return false;
         }
 
@@ -155,9 +155,14 @@ namespace 테트리스만들기
             return false;
         }
 
-        internal void Next()
+        internal bool Next()
         {
             now.Reset();
+            return gboard.MoveEnable(now.BlockNum,Turn,now.X,now.Y);
+        }
+        internal void Restart()
+        {
+            gboard.ClearBoard();
         }
     }
 }
