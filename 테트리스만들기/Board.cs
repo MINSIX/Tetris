@@ -21,7 +21,8 @@ namespace 테트리스만들기
             {
             }
             int[,] board = new int[GameRule.BX, GameRule.BY];
-            internal int this[int x, int y]
+            int[,] cboard = new int[GameRule.BX, GameRule.BY];
+        internal int this[int x, int y]
             {
                 get
                 {
@@ -60,7 +61,58 @@ namespace 테트리스만들기
                 }
             CheckLines(y + 3);
             }
+        internal void CopyBoard()
+        {
+            for(int xx=0;xx<GameRule.BX;xx++)
+                for(int yy=0;yy<GameRule.BY;yy++)
+                    cboard[xx,yy]=board[xx,yy];
+        }
 
+        internal void LStore(int bn, int turn, int x, int y)
+        {
+            for (int xx = 0; xx < GameRule.BX; xx++)
+            {
+                for (int yy = 0; yy < GameRule.BY; yy++)
+                {
+                   
+                        CopyBoard();
+                    if (board[xx, yy] != 0)
+                    {
+                        board[xx, yy] = 0;
+                        board[GameRule.BX - yy - 1, xx] = cboard[xx, yy];
+
+                    }
+                       
+                }
+            }
+        }
+        internal void RStore(int bn, int turn, int x, int y)
+        {
+            for (int xx = 0; xx < GameRule.BX; xx++)
+            {
+                for (int yy = 0; yy < GameRule.BY; yy++)
+                {
+
+                    CopyBoard();
+                    if (board[xx, yy] != 0)
+                    {
+                        board[xx, yy] = 0; 
+                        board[yy, xx] = cboard[xx, yy];
+                    }
+                }
+            }
+        }
+        internal void DAB()
+        {
+            for (int xx = GameRule.BX-1; xx >=0; xx--)
+            {
+                for (int yy = GameRule.BY-1; yy >=0; yy--)
+                {
+                  
+
+                }
+            }
+        }
         private void CheckLines(int y)
         {
             int yy = 0;

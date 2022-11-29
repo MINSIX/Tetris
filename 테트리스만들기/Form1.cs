@@ -183,8 +183,7 @@ namespace 테트리스만들기
         {
             if (game.MoveLeft())
             {
-                Region rg = MakeRegion(1, 0);
-                Invalidate(rg);
+                 MoveSSDown();
             }
         }
 
@@ -192,8 +191,7 @@ namespace 테트리스만들기
         {
             if (game.MoveRight())
             {
-                Region rg = MakeRegion(-1, 0);
-                Invalidate(rg);
+                MoveSSDown();
             }
         }
         private Region MakeRegion(int cx, int cy)

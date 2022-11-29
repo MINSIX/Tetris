@@ -11,7 +11,7 @@ namespace 테트리스만들기
     {
         Diagram now;
         Board gboard=Board.GameBoard; //단일객체
-
+     
 
 
 
@@ -60,49 +60,16 @@ namespace 테트리스만들기
         }
         internal bool MoveLeft()
         {
-            for (int xx = 0; xx < 4; xx++)
-            {
-                for (int yy = 0; yy < 4; yy++)
-                {
-                    if (BlockValue.bvals[now.BlockNum, Turn, xx, yy] != 0)
-                    {
-                        if (now.X + xx <= 0)
-                        {
-                            return false;
-                        }
-                    }
-                }
-            }
-
-            if (gboard.MoveEnable(now.BlockNum, Turn, now.X - 1, now.Y))
-            {
-                now.MoveLeft();
-                return true;
-            }
-            return false;
+            gboard.LStore(now.BlockNum, Turn, now.X, now.Y);
+            MoveDown();
+            return true;
         }
 
         internal bool MoveRight()
         {
-            for (int xx = 0; xx < 4; xx++)
-            {
-                for (int yy = 0; yy < 4; yy++)
-                {
-                    if (BlockValue.bvals[now.BlockNum, Turn, xx, yy] != 0)
-                    {
-                        if ((now.X + xx + 1) >= GameRule.BX)
-                        {
-                            return false;
-                        }
-                    }
-                }
-            }
-            if (gboard.MoveEnable(now.BlockNum, Turn, now.X + 1, now.Y))
-            {
-                now.MoveRight();
-                return true;
-            }
-            return false;
+            gboard.RStore(now.BlockNum, Turn, now.X, now.Y);
+            MoveDown();
+            return true;
         }
 
         internal bool MoveDown()
