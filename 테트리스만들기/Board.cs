@@ -8,6 +8,7 @@ namespace 테트리스만들기
 {
      class Board
     {
+            int count;
             internal static Board GameBoard
             {
                 get;
@@ -104,12 +105,23 @@ namespace 테트리스만들기
         }
         internal void DAB()
         {
-            for (int xx = GameRule.BX-1; xx >=0; xx--)
+            count = 0;
+            int x = -1;
+            for (int yy = GameRule.BY -1; yy >= 0; yy--)
             {
-                for (int yy = GameRule.BY-1; yy >=0; yy--)
+                for (int xx = GameRule.BX - 1; xx >= 0; xx--)
                 {
-                  
-
+                    if (board[xx, yy] != 0) { x = xx;break; }
+                }if(x!=-1)
+                count++;
+            }
+            for (int y=GameRule.BX-1; y > 0; y--)
+            {
+                for (int xx = 0; xx < GameRule.BX; xx++)
+                {
+                    //윗줄의 내용을 아랫줄에 줄복사하는코드
+                    if(board[xx, y] != 0) { board[xx, y] = board[xx, y + count]; }
+                   
                 }
             }
         }

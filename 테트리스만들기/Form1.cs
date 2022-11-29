@@ -181,18 +181,14 @@ namespace 테트리스만들기
 
         private void MoveLeft()
         {
-            if (game.MoveLeft())
-            {
-                 MoveSSDown();
-            }
+            MoveSSDown();
+            game.MoveLeft();
         }
 
         private void MoveRight()
         {
-            if (game.MoveRight())
-            {
-                MoveSSDown();
-            }
+            MoveSSDown();
+            game.MoveRight();
         }
         private Region MakeRegion(int cx, int cy)
         {
