@@ -10,14 +10,37 @@ namespace 테트리스만들기
     internal class Game
     {
         Diagram now;
+        Board gboard=Board.GameBoard; //단일객체
+    
+    
+      
+     
+
+        //단일객체
+        internal static Game Singleton
+        {
+            get;
+            private set;
+        }
+        internal int this[int x, int y]
+        {
+            get
+            {
+                return gboard[x, y];
+            }
+        }
+        static Game()
+        {
+            Singleton = new Game();
+        }
+        Game()
+        {
+            now = new Diagram();
+        }
         internal Point NowPosition
         {
             get
             {
-                if(now== null)
-                {
-                    return new Point(0, 0); //0,0 반환
-                }
                 return new Point(now.X, now.Y); //now의 x,y 반환
             }
         }
@@ -30,28 +53,15 @@ namespace 테트리스만들기
             get { return now.Turn; }
         }
         #region
-        //단일객체
-        internal static Game Singleton
-        {
-            get;
-            private set;
-        }
-        static Game()
-        {
-            Singleton = new Game();
-        }
-        Game()
-        {
-            now=new Diagram();
-        }
+    
         #endregion
         internal bool MoveLeft()
         {
-            for(int xx = 0; xx < 4; xx++)
+            for (int xx = 0; xx < 4; xx++)
             {
-                for(int yy= 0; yy < 4; yy++)
+                for (int yy = 0; yy < 4; yy++)
                 {
-                    if(BlockValue.bvals[now.BlockNum,now.Turn,xx,yy]!=0)
+                    if (BlockValue.bvals[now.BlockNum, now.Turn, xx, yy] != 0)
                     {
                         if (now.X + xx <= 0)
                         {
@@ -59,9 +69,14 @@ namespace 테트리스만들기
                         }//위치 멈추게하기(벽안넘도록)
                     }
                 }
-            }   now.MoveLeft();
+            }
+            if (gboard.MoveEnable(now.BlockNum, Turn, now.X - 1, now.Y))
+            {
+                now.MoveLeft();
                 return true;
-          }
+            }
+            return false;
+        }
         internal bool MoveRight()
         {
             for (int xx = 0; xx < 4; xx++)
@@ -77,8 +92,12 @@ namespace 테트리스만들기
                     }
                 }
             }
-            now.MoveRight();
-            return true;
+            if (gboard.MoveEnable(now.BlockNum, Turn, now.X + 1, now.Y))
+            {
+                now.MoveRight();
+                return true;
+            }
+            return false;
         }
         internal bool MoveDown()
         {
@@ -86,17 +105,25 @@ namespace 테트리스만들기
             {
                 for (int yy = 0; yy < 4; yy++)
                 {
-                    if (BlockValue.bvals[now.BlockNum, now.Turn, xx, yy] != 0)
+                    if (BlockValue.bvals[now.BlockNum, Turn, xx, yy] != 0)
                     {
-                        if (now.Y + yy + 1 >= GameRule.BY)
+                        if ((now.Y + yy + 1)>= GameRule.BY)
                         {
+                           // gboard.Store(now.BlockNum, Turn, now.X, now.Y);
+                          
                             return false;
                         }//위치 멈추게하기(벽안넘도록)
                     }
                 }
             }
-            now.MoveDown();
-            return true;
+            if (gboard.MoveEnable(now.BlockNum, Turn, now.X, now.Y+1)) 
+            {
+                now.MoveDown();
+                return true;
+            }
+            gboard.Store(now.BlockNum, Turn, now.X, now.Y);
+
+            return false;
         }
         internal bool MoveTurn()
         {
@@ -108,14 +135,19 @@ namespace 테트리스만들기
                     {
                         if (((now.X+xx)<0)||(now.X+xx)>=GameRule.BX||((now.Y+yy)>=GameRule.BY))
                         {
+
                             return false;
                         }//위치 멈추게하기(벽안넘도록)
                     }
                 }
             }
-            now.MoveTurn();
-            return true;
-        }
+            if (gboard.MoveEnable(now.BlockNum, (Turn + 1) % 4, now.X, now.Y))
+            { 
+                now.MoveTurn();
+                return true;
+            }
+            return false;
+            }
         internal void Next()
         {
             now.Reset();

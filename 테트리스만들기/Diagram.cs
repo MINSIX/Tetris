@@ -36,9 +36,9 @@ namespace 테트리스만들기
         {
             Random random= new Random();
             X = GameRule.SX;
-            Y=GameRule.SY;
+            Y= GameRule.SY;
             Turn=random.Next()%4;
-            BlockNum = 0;// random.Next()%7;//7개의 블록 중 하나
+            BlockNum = random.Next()%7;//7개의 블록 중 하나
         }
         internal void MoveLeft() //왼쪽누르면 x--
         {
