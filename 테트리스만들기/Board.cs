@@ -113,29 +113,25 @@ namespace 테트리스만들기
         }
             internal void DAB()
             {
-            int breakpoint;
-            for (int yy = GameRule.BY -1; yy >= 0; yy--)
+            int breakpoint=0;
+            for (int yy = GameRule.BY -1; yy >= 1; yy--)
             {
                 breakpoint = 0;
                 for (int xx = 0; xx < GameRule.BX; xx++)
                 {
-                    if (board[xx, yy] != 0) { breakpoint = 1; break; }
+                    if (board[xx, yy] != 0) { breakpoint = 1; }
                 }
-                if (breakpoint == 1) { continue; }
-                else
-                {
-
-                }
-                for (int y=GameRule.BY-1; y > 0; y--)
-                {
+                if (breakpoint == 0) {
                     for (int xx = 0; xx < GameRule.BX; xx++)
                     {
                         //윗줄의 내용을 아랫줄에 줄복사하는코드
 
-                        board[xx, y] = board[xx, y - 1];
+                        board[xx, yy] = board[xx, yy - 1];
+                        board[xx, yy - 1] = 0;
                     }
                 }
             }
+      
         }
         private void CheckLines(int y)
         {

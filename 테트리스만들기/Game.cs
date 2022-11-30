@@ -61,43 +61,14 @@ namespace 테트리스만들기
         internal bool MoveLeft()
         {
             gboard.LStore(now.BlockNum, Turn, now.X, now.Y);
-            for (int y = (GameRule.BY / 4) - 2; y >= 0; y--)
-
-                for (int x = (GameRule.BX / 4) - 2; x >= 0; x--)
-                {
-                    for (int xx = 0; xx < 4; xx++)
-                    {
-                        for (int yy = 0; yy < 4; yy++)
-                        {
-                            if (gboard.MoveEnable(now.BlockNum, Turn, 4 * x, 4 * y))
-                            {
-                                now.MoveDown();
-                            }
-                        }
-                    }
-
-                }
+            gboard.DAB();
             return true;
         }
 
         internal bool MoveRight()
         {
             gboard.RStore(now.BlockNum, Turn, now.X, now.Y);
-            for (int y = (GameRule.BY / 4) - 1; y >= 0; y--)
-            
-                for (int x = (GameRule.BX / 4) - 1; x >= 0; x--)
-                {   
-                   for(int xx = 0; xx < 4; xx++)
-                    {
-                        for(int yy=0; yy < 4; yy++)
-                        {
-                            if(gboard.MoveEnable(now.BlockNum, Turn, 4 * x, 4 * y ))
-                    {       now.MoveDown();
-                            }
-                        }
-                    }
-                        
-                }
+           gboard.DAB();
             return true;
         }
 
