@@ -61,7 +61,7 @@ namespace 테트리스만들기
         internal bool MoveLeft()
         {
             gboard.LStore(now.BlockNum, Turn, now.X, now.Y);
-            gboard.DAB();
+           gboard.DAB();
             return true;
         }
 

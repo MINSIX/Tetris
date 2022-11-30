@@ -113,26 +113,51 @@ namespace 테트리스만들기
         }
             internal void DAB()
             {
-            int breakpoint=0;
-            for (int yy = GameRule.BY -1; yy >= 1; yy--)
+     
+            for (int yy = GameRule.BY-1; yy >= 0; yy--)
             {
-                breakpoint = 0;
                 for (int xx = 0; xx < GameRule.BX; xx++)
                 {
-                    if (board[xx, yy] != 0) { breakpoint = 1; }
-                }
-                if (breakpoint == 0) {
-                    for (int xx = 0; xx < GameRule.BX; xx++)
+                    if (board[xx, yy] == 1)
                     {
-                        //윗줄의 내용을 아랫줄에 줄복사하는코드
+                        int breakpoint = 0;
+                      
+                        for (int yi = yy; yi < GameRule.BY; yi++)
+                        {
+                            int count = 0;
+                            for (int xi = 0; xi < GameRule.BX; xi++)
+                            {
+                                if (board[xi, yi] == 0)
+                                {
+                                    count++;
+                                }
+                                else
+                                {
+                                    breakpoint++;
+                                    break;
+                                }
 
-                        board[xx, yy] = board[xx, yy - 1];
-                        board[xx, yy - 1] = 0;
+                            }
+                            if (breakpoint == 1)
+                            {
+                                for (int xi = 0; xi < GameRule.BX; xi++)
+                                {
+                                    //왜안대지
+                                    //board[xi, yi + count/20] = board[xi, yi];
+                                    //board[xi, yi] = 0;
+                                }
+                            }
+                         
+                        }
+                    }
+                  
+                    
                     }
                 }
+              
             }
       
-        }
+        
         private void CheckLines(int y)
         {
             int yy = 0;
