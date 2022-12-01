@@ -62,10 +62,8 @@ namespace 테트리스만들기
                 }
             CheckLines(y + 3);
             }
-        internal void CopyBoard()
+        internal void CopyBoard(int xx, int yy)
         {
-            for(int xx=0;xx<GameRule.BX;xx++)
-                for(int yy=0;yy<GameRule.BY;yy++)
                     cboard[xx,yy]=board[xx,yy];
         }
 
@@ -74,21 +72,18 @@ namespace 테트리스만들기
             for (int xx = 0; xx < GameRule.BX; xx++)
             {
                 for (int yy = 0; yy < GameRule.BY; yy++)
-                {
-                   
-                        
-                    if (board[xx, yy] == 1)
-                    {
-                        CopyBoard();
-                        board[xx, yy] = 0;
-                        board[GameRule.BX - yy - 1, xx] = cboard[xx, yy];
-                        
-                        
-
-                    }
-                       
+                {    
+                        CopyBoard(xx,yy);
                 }
             }
+            for (int xx = 0; xx < GameRule.BX; xx++)
+            {
+                for (int yy = 0; yy < GameRule.BY; yy++)
+                {
+                    board[xx, yy] = cboard[yy, GameRule.BX - xx - 1];
+                }
+            }
+          
         }
         internal void RStore(int bn, int turn, int x, int y)
         {
@@ -96,71 +91,108 @@ namespace 테트리스만들기
             {
                 for (int yy = 0; yy < GameRule.BY; yy++)
                 {
+                    CopyBoard(xx, yy);
+                }
+            }
+            for (int xx = 0; xx < GameRule.BX; xx++)
+            {
+                for (int yy = 0; yy < GameRule.BY; yy++)
+                {
+                    board[xx, yy] = cboard[GameRule.BY-yy-1, xx ];
 
-
-                    if (board[xx, yy] == 1)
-                    {
-                        CopyBoard();
-                        if (board[yy, xx] == cboard[xx, yy])
-                            ;
-                        else
-                        {
-                            board[yy, xx] = board[xx, yy];
-                            board[xx, yy] = 0;
-                        }
-                    }
 
                 }
             }
         }
-<<<<<<< HEAD
-        //internal void DAB()
-        //{
-        //    count = 0;
-        //    int x = -1;
-        //    for (int yy = GameRule.BY -1; yy >= 0; yy--)
-        //    {
-        //        for (int xx = GameRule.BX - 1; xx >= 0; xx--)
-        //        {
-        //            if (board[xx, yy] != 0) { x = xx;break; }
-        //        }if(x!=-1)
-        //        count++;
-        //    }
-        //    for (int y=GameRule.BX-1; y > 0; y--)
-        //    {
-        //        for (int xx = 0; xx < GameRule.BX; xx++)
-        //        {
-        //            //윗줄의 내용을 아랫줄에 줄복사하는코드
-        //            if(board[xx, y] != 0) { board[xx, y] = board[xx, y + count]; }
-                   
-        //        }
-        //    }
-        //}
-=======
-        internal void DAB()
+            //internal void DAB()
+            //{
+     
+            //for (int yy = GameRule.BY-1; yy >= 0; yy--)
+            //{
+            //    for (int xx = 0; xx < GameRule.BX; xx++)
+            //    {
+            //        if (board[xx, yy] == 1)
+            //        {
+            //            int breakpoint = 0;
+                      
+            //            for (int yi = yy; yi < GameRule.BY; yi++)
+            //            {
+            //                int count = 0;
+            //                for (int xi = 0; xi < GameRule.BX; xi++)
+            //                {
+            //                    if (board[xi, yi] == 0)
+            //                    {
+            //                        count++;
+            //                    }
+            //                    else
+            //                    {
+            //                        breakpoint++;
+            //                        break;
+            //                    }
+
+            //                }
+            //                if (breakpoint == 1)
+            //                {
+            //                    for (int xi = 0; xi < GameRule.BX; xi++)
+            //                    {
+            //                        //왜안대지
+            //                        //board[xi, yi + count/20] = board[xi, yi];
+            //                        //board[xi, yi] = 0;
+            //                    }
+            //                }
+                         
+            //            }
+            //        }
+                  
+                    
+            //        }
+            //    }
+              
+            //}
+            internal void CheckBlocks()
         {
-            count = 0;
-            int x = -1;
-            for (int yy = GameRule.BY -1; yy >= 0; yy--)
+            for(int yy = GameRule.BY-1; yy >= 0; yy--) { 
+            for(int xx = 0; xx < GameRule.BX; xx++)
             {
-                for (int xx =0; xx <GameRule.BX; xx++)
-                {
-                    if (board[xx, yy] != 0) { x = xx;break; }
-                }
-                if(x!=-1)
-                count++;
+                    if (board[xx, yy] == 1)
+                    {
+                        DownBlocks(CountBlank(yy-1),yy-1);
+                        
+                        break;
+                    }
+                }   
             }
-            for (int y=GameRule.BY-1; y > 0; y--)
+        }
+      internal int CountBlank(int yy)
+        {
+            int Blankcount = 0;
+            int x = 0;
+            while (board[x, yy] != 1)
+            {
+                
+                x++;
+                if (x == GameRule.BX)
+                {
+                    x = 0;
+                    Blankcount++;
+                    yy++;
+                }
+            }
+            return Blankcount;
+        }
+        internal void DownBlocks(int count,int y)
+        {
+            for (; y > 0; y--)
             {
                 for (int xx = 0; xx < GameRule.BX; xx++)
                 {
                     //윗줄의 내용을 아랫줄에 줄복사하는코드
-                    if (board[xx, y] != 0 && y + count < GameRule.BX) { board[xx, y] = board[xx, y + count]; }
-                    else if (y + count >= GameRule.BX) { board[xx, y] = board[xx, GameRule.BY - 1]; }
+
+                    board[xx, y] = board[xx, y - count];
                 }
             }
         }
->>>>>>> refs/remotes/origin/main
+        
         private void CheckLines(int y)
         {
             int yy = 0;

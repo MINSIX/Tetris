@@ -183,6 +183,7 @@ namespace 테트리스만들기
         {
             MoveSSDown();
             game.MoveLeft();
+            
         }
 
         private void MoveRight()
